@@ -1,0 +1,15 @@
+name: Feature proposal
+description: Explain a problem and a focused improvement.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Who needs this and what is difficult today?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed behavior and alternatives
+    validations:
+      required: true

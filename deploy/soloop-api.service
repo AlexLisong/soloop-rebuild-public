@@ -1,0 +1,33 @@
+[Unit]
+Description=Soloop workspace API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=soloop-api
+Group=soloop-api
+WorkingDirectory=/opt/soloop/current
+Environment=NODE_ENV=production
+Environment=SOLOOP_DB=/var/lib/soloop/soloop.db
+Environment=SOLOOP_API_PORT=8014
+Environment=SOLOOP_MAINTENANCE_FILE=/var/lib/soloop-maintenance
+EnvironmentFile=/etc/soloop/app.env
+ExecStart=/usr/bin/node /opt/soloop/current/server/index.mjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+ReadWritePaths=/var/lib/soloop
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryMax=512M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

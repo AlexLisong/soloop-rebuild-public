@@ -1,0 +1,7 @@
+[Unit]
+Description=Back up the Soloop workspace database
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/soloop/current/deploy/backup-daily.sh
+UMask=0077

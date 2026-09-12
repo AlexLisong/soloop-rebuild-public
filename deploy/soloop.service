@@ -1,0 +1,28 @@
+[Unit]
+Description=Soloop frontend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=soloop
+Group=soloop
+WorkingDirectory=/opt/soloop/current
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node /opt/soloop/current/node_modules/vinext/dist/cli.js start --hostname 127.0.0.1 --port 8013
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0027
+CacheDirectory=soloop
+InaccessiblePaths=-/var/lib/soloop -/etc/soloop
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryMax=512M
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target
